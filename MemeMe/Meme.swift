@@ -21,5 +21,18 @@ struct Meme {
         self.originalImage = originalImage
         self.memeImage = memeImage
     }
+}
 
+// Stub data for Meme app
+extension Meme {
+    static var staticMemes: [Meme] {
+        var memes = [Meme]()
+        for index in 1...3 {
+            var indexString = String(index)
+            var image = UIImage(named: indexString)
+            var memeInstance = Meme(topText: "Toptext" + indexString, bottomText: "BottomText" + indexString, originalImage: image!, memeImage: image!)
+            memes.append(memeInstance)
+        }
+        return memes
+    }
 }

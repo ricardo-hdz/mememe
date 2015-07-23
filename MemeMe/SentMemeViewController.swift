@@ -13,7 +13,7 @@ class SentMemeViewController: UIViewController, UINavigationControllerDelegate {
     var memes: [Meme]!
     
     override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear()
+        super.viewWillAppear(true)
         
         let object = UIApplication.sharedApplication().delegate
         let appDelegate = object as! AppDelegate
