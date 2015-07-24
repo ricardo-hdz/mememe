@@ -18,6 +18,19 @@ class MemeCollectionViewController: UICollectionViewController {
         memeCollectionView!.registerClass(MemeCell.self, forCellWithReuseIdentifier: "memeCell")
     }
     
+    override func viewWillAppear(animated: Bool) {
+        var addMeme = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "viewEditor")
+        self.navigationItem.rightBarButtonItem = addMeme
+    }
+    
+    /**
+    Action hanlder for the Add meme button
+    **/
+    func viewEditor() {
+        let addMemeController = self.storyboard?.instantiateViewControllerWithIdentifier("AddMemeViewController") as! AddMemeViewController
+        self.navigationController!.pushViewController(addMemeController, animated: true)
+    }
+    
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return memes.count
     }
@@ -33,6 +46,9 @@ class MemeCollectionViewController: UICollectionViewController {
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let memeDetailVC = self.storyboard?.instantiateViewControllerWithIdentifier("MemeDetailViewController") as! MemeDetailViewController
         memeDetailVC.meme = self.memes[indexPath.row]
-        self.navigationController?.pushViewController(memeDetailVC, animated: true)
+        //memeDetailVC.modalInPopover = true
+        memeDetailVC.modalPresentationStyle = UIModalPresentationStyle.FullScreen
+//        self.navigationController?.pushViewController(memeDetailVC, animated: true)
+        self.navigationController?.presentViewController(memeDetailVC, animated: true, completion: nil)
     }
 }

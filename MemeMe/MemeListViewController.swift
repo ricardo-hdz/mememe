@@ -9,11 +9,12 @@
 import UIKit
 
 class MemeListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
     let stubMemes = Meme.staticMemes
     
     override func viewWillAppear(animated: Bool) {
-        var addMeme = UIBarButtonItem(title: "Add", style: UIBarButtonItemStyle.Plain, target: self, action: "viewEditor")
-        self.navigationItem.rightBarButtonItem = addMeme
+        var addMemeBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "viewEditor")
+        self.navigationItem.rightBarButtonItem = addMemeBtn
     }
     
     /**
@@ -21,7 +22,8 @@ class MemeListViewController: UIViewController, UITableViewDataSource, UITableVi
     **/
     func viewEditor() {
         let addMemeController = self.storyboard?.instantiateViewControllerWithIdentifier("AddMemeViewController") as! AddMemeViewController
-        self.navigationController!.pushViewController(addMemeController, animated: true)
+        var nav = UINavigationController(rootViewController: addMemeController)
+        self.showDetailViewController(nav, sender: self)
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -51,6 +53,10 @@ class MemeListViewController: UIViewController, UITableViewDataSource, UITableVi
         let memeDetailVC = self.storyboard?.instantiateViewControllerWithIdentifier("MemeDetailViewController") as! MemeDetailViewController
         memeDetailVC.meme = self.stubMemes[indexPath.row]
         self.navigationController?.pushViewController(memeDetailVC, animated: true)
+        self.navigationController?.pushViewController(memeDetailVC, animated: true)
+        memeDetailVC.hidesBottomBarWhenPushed = true
+        self.navigationController?.presentViewController(memeDetailVC, animated: true, completion: nil)
+        
     }
 
 }
