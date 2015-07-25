@@ -13,12 +13,13 @@ class MemeListViewController: UIViewController, UITableViewDataSource, UITableVi
     let stubMemes = Meme.staticMemes
     
     override func viewWillAppear(animated: Bool) {
+        // Adds navigation "Add Meme" button
         var addMemeBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "viewEditor")
         self.navigationItem.rightBarButtonItem = addMemeBtn
     }
     
     /**
-        Action hanlder for the Add meme button
+        Action handler for the Add meme button
     **/
     func viewEditor() {
         let addMemeController = self.storyboard?.instantiateViewControllerWithIdentifier("AddMemeViewController") as! AddMemeViewController
@@ -34,14 +35,11 @@ class MemeListViewController: UIViewController, UITableViewDataSource, UITableVi
         Displays Meme List Table Rows
     **/
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("memeCell") as! UITableViewCell
         let meme = stubMemes[indexPath.row]
-        cell.textLabel?.text = meme.topText
-        cell.imageView?.image = meme.memeImage
+        let cell = tableView.dequeueReusableCellWithIdentifier("memeCell") as! MemeTableViewCell
+        cell.memeImage.image = meme.memeImage
+        cell.memeText.text = meme.topText + " " + meme.bottomText
         
-        if let detailText = cell.detailTextLabel {
-            detailText.text = meme.bottomText
-        }
         return cell
     }
     
@@ -49,14 +47,9 @@ class MemeListViewController: UIViewController, UITableViewDataSource, UITableVi
         Displays Meme Detail View from List
     **/
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        // Instantiate detail meme controller ans present
         let memeDetailVC = self.storyboard?.instantiateViewControllerWithIdentifier("MemeDetailViewController") as! MemeDetailViewController
         memeDetailVC.meme = self.stubMemes[indexPath.row]
         self.navigationController?.pushViewController(memeDetailVC, animated: true)
-        self.navigationController?.pushViewController(memeDetailVC, animated: true)
-        memeDetailVC.hidesBottomBarWhenPushed = true
-        self.navigationController?.presentViewController(memeDetailVC, animated: true, completion: nil)
-        
     }
 
 }

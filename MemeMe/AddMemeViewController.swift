@@ -21,6 +21,7 @@ class AddMemeViewController: UIViewController, UINavigationControllerDelegate, U
     let memeTextAttributes = [
         NSStrokeColorAttributeName: UIColor.blackColor(),
         NSForegroundColorAttributeName: UIColor.whiteColor(),
+        NSBackgroundColorAttributeName: UIColor.clearColor(),
         NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
         NSStrokeWidthAttributeName: 3.0
     ]
@@ -28,62 +29,11 @@ class AddMemeViewController: UIViewController, UINavigationControllerDelegate, U
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
-        // Sets the image picket items
-        var pickImage = UIBarButtonItem(title: "Album", style: UIBarButtonItemStyle.Plain, target: self, action: "displayImagePickerLibrary")
-        var spaceItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: self, action: nil)
-        var cameraButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Camera, target: self, action: "displayImagePickerCamera")
-        cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(.Camera)
 
-        menuBar.setItems([cameraButton, spaceItem, pickImage], animated: false)
-        
-        // Sets the textfields
-        topText.text = "TOP"
-        topText.textAlignment = NSTextAlignment.Center
-        topText.defaultTextAttributes = memeTextAttributes
-        topText.delegate = self
-        
-        bottomText.text = "BOTTOM"
-        bottomText.textAlignment = NSTextAlignment.Center
-        bottomText.defaultTextAttributes = memeTextAttributes
-        bottomText.delegate = self
-        
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        // Subscibe to keyboard notifications
+        setMenuBarItems()
+        setMemeTextfields()
+        setNavigationBarItems()
         self.subscribeToKeyboardNotifications()
-
-        // Set navigation bar buttons
-        var cancelBtn = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: "cancelAction")
-        self.navigationBar.rightBarButtonItem = cancelBtn
-        
-        var shareBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: "shareMeme")
-        self.navigationItem.leftBarButtonItem = shareBtn
-    }
-    
-    /**
-         Dismiss VCV and returns to list view
-    **/
-    func cancelAction() {
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    func textFieldDidBeginEditing(textField: UITextField) {
-        textField.text = ""
-    }
-    
-    func textFieldShouldClear(textField: UITextField) -> Bool {
-        return true
-    }
-    
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        //var keyboardHideNotification = NSNotification(name: "keyboardWillHide", object: self)
-        //NSNotificationCenter.defaultCenter().postNotification(keyboardHideNotification)
-        self.view.endEditing(true)
-        
-        return false
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -94,6 +44,70 @@ class AddMemeViewController: UIViewController, UINavigationControllerDelegate, U
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    /**
+        Sets the share and cancel buttons in the navigation bar
+    **/
+    func setNavigationBarItems() {
+        var cancelBtn = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: "cancelAction")
+        self.navigationBar.rightBarButtonItem = cancelBtn
+        
+        var shareBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: "shareMeme")
+        self.navigationBar.leftBarButtonItem = shareBtn
+        self.navigationBar.leftBarButtonItem?.enabled = false
+    }
+    
+    /**
+        Sets the album and camera bar button items
+    **/
+    func setMenuBarItems() {
+        var pickImage = UIBarButtonItem(title: "Album", style: UIBarButtonItemStyle.Plain, target: self, action: "displayImagePickerLibrary")
+        var spaceItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: self, action: nil)
+        var cameraButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Camera, target: self, action: "displayImagePickerCamera")
+        cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(.Camera)
+        
+        menuBar.setItems([cameraButton, spaceItem, pickImage], animated: false)
+    }
+    
+    /**
+        Sets the meme textfields to display in the uI
+    **/
+    func setMemeTextfields() {
+        // Sets the textfields
+        topText.text = "TOP"
+        topText.textAlignment = NSTextAlignment.Center
+        topText.defaultTextAttributes = memeTextAttributes
+        topText.backgroundColor = UIColor.clearColor()
+        topText.textColor = UIColor.whiteColor()
+        topText.delegate = self
+        
+        bottomText.text = "BOTTOM"
+        bottomText.textAlignment = NSTextAlignment.Center
+        bottomText.defaultTextAttributes = memeTextAttributes
+        bottomText.backgroundColor = UIColor.clearColor()
+        bottomText.delegate = self
+    }
+    
+    /**
+         Dismiss view controller and returns to list view
+    **/
+    func cancelAction() {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        textField.text = ""
+    }
+    
+    func textFieldShouldClear(textField: UITextField) -> Bool {
+        return true
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
     }
     
     /**
@@ -119,14 +133,14 @@ class AddMemeViewController: UIViewController, UINavigationControllerDelegate, U
     }
     
     /**
-    Repositions view frame when keyboard hides
+        Repositions view frame when keyboard hides
     **/
     func keyboardWillHide(notification: NSNotification) {
         self.view.frame.origin.y += getKeyboardHeight(notification)
     }
     
     /**
-    Gets the keyboard height
+        Gets the keyboard height
     **/
     func getKeyboardHeight(notifcation: NSNotification) -> CGFloat {
         let userInfo = notifcation.userInfo
@@ -135,18 +149,20 @@ class AddMemeViewController: UIViewController, UINavigationControllerDelegate, U
     }
     
     /**
-    Sets the selected image on the UIImageView
+        Sets the selected image on the UIImageView
     **/
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
         if let image = info["UIImagePickerControllerOriginalImage"] as? UIImage {
             originalImage.image = image
+            originalImage.sizeToFit()
+            displayTextfields()
+            self.navigationBar.leftBarButtonItem?.enabled = true
         }
-        displayTextfields()
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
     
     /**
-    Displays the textfields in the view
+        Displays the textfields in the view
     **/
     func displayTextfields() {
         topText.hidden = false
@@ -168,13 +184,13 @@ class AddMemeViewController: UIViewController, UINavigationControllerDelegate, U
         UIGraphicsEndImageContext()
         
         self.navigationController?.navigationBarHidden = false
-        self.memeToolbar.hidden = true
+        self.memeToolbar.hidden = false
         
         return memeImage
     }
     
     /**
-    Image Picker Controller - Cancel handler
+        Image Picker Controller - Cancel handler
     **/
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         picker.dismissViewControllerAnimated(true, completion: nil)
@@ -182,22 +198,22 @@ class AddMemeViewController: UIViewController, UINavigationControllerDelegate, U
     
     
     /**
-    UIBarButtomItem - Image Picker handlers - PhotoLibrary
+        UIBarButtomItem - Image Picker handlers - PhotoLibrary
     **/
     func displayImagePickerLibrary() {
         self.displayImagePicker(UIImagePickerControllerSourceType.PhotoLibrary)
     }
     
     /**
-    UIBarButtomItem - Image Picker handlers - Camera
+        UIBarButtomItem - Image Picker handlers - Camera
     **/
     func displayImagePickerCamera() {
         self.displayImagePicker(UIImagePickerControllerSourceType.Camera)
     }
     
     /**
-    Displays the image picker
-    @param sourceType
+        Displays the image picker
+        @param sourceType
     **/
     func displayImagePicker(sourceType: UIImagePickerControllerSourceType) {
         let imagePicker = UIImagePickerController()
@@ -206,7 +222,10 @@ class AddMemeViewController: UIViewController, UINavigationControllerDelegate, U
         self.presentViewController(imagePicker, animated: true, completion: nil)
     }
     
-    @IBAction func shareMeme(sender: AnyObject) {
+    /**
+        Displays a default activity view controller to share the meme
+    **/
+    func shareMeme() {
         var memeImg = generateMemeImage()
         var activityCV = UIActivityViewController(activityItems: [memeImg], applicationActivities: nil)
         activityCV.completionWithItemsHandler = {(activityType, completed:Bool, returnedItems, activityError) in
@@ -226,7 +245,7 @@ class AddMemeViewController: UIViewController, UINavigationControllerDelegate, U
     }
     
     /**
-    Saves the meme to the AppDelegate
+        Saves the meme to the AppDelegate shared instance
     **/
     func saveMeme(meme: Meme) {
         let object = UIApplication.sharedApplication().delegate

@@ -10,20 +10,14 @@
 import UIKit
 
 class MemeCell: UICollectionViewCell {
-    var memeText: UILabel!
     var memeImage: UIImageView!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        memeImage = UIImageView(frame: CGRect(x: 21, y: 13, width: 111, height: 111))
-        memeText = UILabel(frame: CGRect(x: 147, y: 58, width: 152, height: 21))
-        memeImage.contentMode = UIViewContentMode.ScaleAspectFit
+        memeImage = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        memeImage.contentMode = UIViewContentMode.ScaleToFill
         contentView.addSubview(memeImage!)
-        
-        memeText.font = UIFont.systemFontOfSize(UIFont.smallSystemFontSize())
-        memeText.textAlignment = NSTextAlignment.Center
-        contentView.addSubview(memeText)
     }
 
     required init(coder aDecoder: NSCoder) {
