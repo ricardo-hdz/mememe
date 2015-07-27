@@ -8,34 +8,24 @@
 
 import UIKit
 
-class MemeListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class MemeListViewController: MemeViewController, UITableViewDataSource, UITableViewDelegate {
     
-    let stubMemes = Meme.staticMemes
+    @IBOutlet weak var memeTableView: UITableView!
     
     override func viewWillAppear(animated: Bool) {
-        // Adds navigation "Add Meme" button
-        var addMemeBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "viewEditor")
-        self.navigationItem.rightBarButtonItem = addMemeBtn
+        super.viewWillAppear(true)
+        memeTableView.reloadData()
     }
-    
-    /**
-        Action handler for the Add meme button
-    **/
-    func viewEditor() {
-        let addMemeController = self.storyboard?.instantiateViewControllerWithIdentifier("AddMemeViewController") as! AddMemeViewController
-        var nav = UINavigationController(rootViewController: addMemeController)
-        self.showDetailViewController(nav, sender: self)
-    }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return stubMemes.count
+        
+    @objc func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return memes.count
     }
     
     /**
         Displays Meme List Table Rows
     **/
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let meme = stubMemes[indexPath.row]
+    @objc func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let meme = memes[indexPath.row]
         let cell = tableView.dequeueReusableCellWithIdentifier("memeCell") as! MemeTableViewCell
         cell.memeImage.image = meme.memeImage
         cell.memeText.text = meme.topText + " " + meme.bottomText
@@ -48,7 +38,7 @@ class MemeListViewController: UIViewController, UITableViewDataSource, UITableVi
     **/
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let memeDetailVC = self.storyboard?.instantiateViewControllerWithIdentifier("MemeDetailViewController") as! MemeDetailViewController
-        memeDetailVC.meme = self.stubMemes[indexPath.row]
+        memeDetailVC.meme = self.memes[indexPath.row]
         self.navigationController?.pushViewController(memeDetailVC, animated: true)
     }
 

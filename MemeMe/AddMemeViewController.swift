@@ -21,7 +21,7 @@ class AddMemeViewController: UIViewController, UINavigationControllerDelegate, U
     let memeTextAttributes = [
         NSStrokeColorAttributeName: UIColor.blackColor(),
         NSForegroundColorAttributeName: UIColor.whiteColor(),
-        NSBackgroundColorAttributeName: UIColor.clearColor(),
+        NSBackgroundColorAttributeName: UIColor.whiteColor(),
         NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
         NSStrokeWidthAttributeName: 3.0
     ]
@@ -78,14 +78,12 @@ class AddMemeViewController: UIViewController, UINavigationControllerDelegate, U
         topText.text = "TOP"
         topText.textAlignment = NSTextAlignment.Center
         topText.defaultTextAttributes = memeTextAttributes
-        topText.backgroundColor = UIColor.clearColor()
         topText.textColor = UIColor.whiteColor()
         topText.delegate = self
         
         bottomText.text = "BOTTOM"
         bottomText.textAlignment = NSTextAlignment.Center
         bottomText.defaultTextAttributes = memeTextAttributes
-        bottomText.backgroundColor = UIColor.clearColor()
         bottomText.delegate = self
     }
     
