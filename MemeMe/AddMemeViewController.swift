@@ -18,6 +18,8 @@ class AddMemeViewController: UIViewController, UINavigationControllerDelegate, U
     
     @IBOutlet weak var navigationBar: UINavigationItem!
     
+    var keyboardHeight: CGFloat!
+    
     let memeTextAttributes = [
         NSStrokeColorAttributeName: UIColor.blackColor(),
         NSForegroundColorAttributeName: UIColor.whiteColor(),
@@ -113,9 +115,9 @@ class AddMemeViewController: UIViewController, UINavigationControllerDelegate, U
     **/
     func subscribeToKeyboardNotifications() {
         // Show keyboard
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardDidShowNotification, object: nil)
         // Hide keyboard
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardDidHideNotification, object: nil)
     }
     
     func unsubscribeFromKeyboardNotifications() {
@@ -127,23 +129,29 @@ class AddMemeViewController: UIViewController, UINavigationControllerDelegate, U
     Repositions view frame when keyboard displays
     **/
     func keyboardWillShow(notification: NSNotification) {
-        self.view.frame.origin.y -= getKeyboardHeight(notification)
+        if self.bottomText.isFirstResponder() {
+            setKeyboardHeight(notification)
+            self.view.frame.origin.y -= self.keyboardHeight
+        }
     }
     
     /**
         Repositions view frame when keyboard hides
     **/
     func keyboardWillHide(notification: NSNotification) {
-        self.view.frame.origin.y += getKeyboardHeight(notification)
+        if (keyboardHeight != nil) {
+            self.view.frame.origin.y += self.keyboardHeight
+            self.keyboardHeight = nil
+        }
     }
     
     /**
         Gets the keyboard height
     **/
-    func getKeyboardHeight(notifcation: NSNotification) -> CGFloat {
-        let userInfo = notifcation.userInfo
+    func setKeyboardHeight(notification: NSNotification) {
+        let userInfo = notification.userInfo
         let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
-        return keyboardSize.CGRectValue().height
+        self.keyboardHeight = keyboardSize.CGRectValue().height
     }
     
     /**

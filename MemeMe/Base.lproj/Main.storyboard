@@ -9,7 +9,7 @@
         <scene sceneID="Rj8-7E-HwZ">
             <objects>
                 <tabBarController id="stJ-Cg-uSz" sceneMemberID="viewController">
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="GC6-tP-2nS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -53,6 +53,7 @@
                         <viewControllerLayoutGuide type="bottom" id="ecr-FE-JsM"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kCj-14-qU6">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleAspectFit" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="jU7-sa-sDI">
@@ -151,6 +152,7 @@
             <objects>
                 <collectionViewController title="MemeCollection" id="3hv-IX-QFh" customClass="MemeCollectionViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" indicatorStyle="white" dataMode="prototypes" id="qmk-5s-T5Y">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="0.0" id="V95-TJ-E8b">
@@ -216,6 +218,7 @@
                         <viewControllerLayoutGuide type="bottom" id="p0U-NV-YlG"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="uUE-HM-bH6">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tcA-Kx-eCY">
@@ -260,7 +263,6 @@
         <!--Navigation Controller-->
         <scene sceneID="Vwo-XD-45P">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="EOi-gD-RAl" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController toolbarHidden="NO" id="irS-3W-rNa" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Xd2-Rf-Cn8">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -273,6 +275,7 @@
                         <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="2JR-my-xT2"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EOi-gD-RAl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-423" y="372.75"/>
         </scene>
@@ -332,6 +335,7 @@
                                 <exclude reference="UVr-RV-eMf"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="0R7-Ws-rcx"/>
                                 <exclude reference="8Kj-oQ-9Q4"/>
                                 <exclude reference="wz7-V4-VHj"/>
                                 <exclude reference="4nY-NK-Eoh"/>
@@ -340,12 +344,11 @@
                                 <exclude reference="gyh-jw-6Fk"/>
                                 <exclude reference="ljc-77-dnh"/>
                                 <exclude reference="tiM-JN-1wg"/>
-                                <exclude reference="0R7-Ws-rcx"/>
-                                <exclude reference="G85-L6-AhP"/>
-                                <exclude reference="rcp-r2-sra"/>
                                 <exclude reference="Ngg-GN-3FZ"/>
                                 <exclude reference="P37-aV-Da2"/>
                                 <exclude reference="UCY-mL-1B9"/>
+                                <exclude reference="G85-L6-AhP"/>
+                                <exclude reference="rcp-r2-sra"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=regular">
@@ -364,16 +367,16 @@
                                 <include reference="UVr-RV-eMf"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="0R7-Ws-rcx"/>
                                 <include reference="8Kj-oQ-9Q4"/>
                                 <include reference="wz7-V4-VHj"/>
                                 <include reference="YGb-Zh-ONi"/>
                                 <include reference="ljc-77-dnh"/>
-                                <include reference="0R7-Ws-rcx"/>
-                                <include reference="G85-L6-AhP"/>
-                                <include reference="rcp-r2-sra"/>
                                 <include reference="Ngg-GN-3FZ"/>
                                 <include reference="P37-aV-Da2"/>
                                 <include reference="UCY-mL-1B9"/>
+                                <include reference="G85-L6-AhP"/>
+                                <include reference="rcp-r2-sra"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=regular">
