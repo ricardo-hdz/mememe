@@ -15,6 +15,7 @@ class MemeViewController: UIViewController {
         // Adds navigation "Add Meme" button
         var addMemeBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "viewEditor")
         self.navigationItem.rightBarButtonItem = addMemeBtn
+        self.tabBarController?.tabBar.hidden = false
     }
     
     var hasNewMeme: Bool {
@@ -32,7 +33,6 @@ class MemeViewController: UIViewController {
             let appDelegate = object as! AppDelegate
             // Use static data on first view
             return appDelegate.memes.count > 0 ? appDelegate.memes : Meme.staticMemes
-            //return self.memes.count > 0 ? self.memes : Meme.staticMemes
         }
     }
     
