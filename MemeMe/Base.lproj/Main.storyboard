@@ -226,16 +226,24 @@
                                     <rect key="frame" x="90" y="299" width="222" height="202"/>
                                 </variation>
                             </imageView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HhZ-Nr-Lgf">
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <items/>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="HhZ-Nr-Lgf" firstAttribute="leading" secondItem="uUE-HM-bH6" secondAttribute="leadingMargin" constant="-16" id="3PI-84-G3D"/>
                             <constraint firstAttribute="centerY" secondItem="a5M-KF-4xp" secondAttribute="centerY" id="MpP-v6-rUq"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="HhZ-Nr-Lgf" secondAttribute="trailing" constant="-16" id="Vhj-OT-rJC"/>
+                            <constraint firstItem="p0U-NV-YlG" firstAttribute="top" secondItem="HhZ-Nr-Lgf" secondAttribute="bottom" id="oXw-70-Zmn"/>
                             <constraint firstAttribute="centerX" secondItem="a5M-KF-4xp" secondAttribute="centerX" id="vW6-oK-mGm"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="OTy-4f-00S"/>
                     <connections>
                         <outlet property="memeImage" destination="a5M-KF-4xp" id="0R3-3s-mxR"/>
+                        <outlet property="memeToolbar" destination="HhZ-Nr-Lgf" id="Cjw-MC-PnF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="utS-bI-ZLU" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -273,7 +281,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="TOP" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HSx-WB-hhJ">
+                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="TOP" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HSx-WB-hhJ">
                                 <rect key="frame" x="284" y="110" width="33" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
@@ -316,12 +324,23 @@
                         <constraints>
                             <constraint firstItem="pe7-6h-vUe" firstAttribute="bottom" secondItem="kh9-bI-dsS" secondAttribute="bottomMargin" id="2QR-ol-HC7"/>
                             <constraint firstItem="pe7-6h-vUe" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="6C8-iY-l3L"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="Mxc-jS-oNK" secondAttribute="bottom" constant="154" id="8vi-0j-IXH"/>
+                            <constraint firstItem="HSx-WB-hhJ" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="50" id="Ij9-Bw-OkB"/>
+                            <constraint firstItem="HSx-WB-hhJ" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" constant="110" id="JaX-8q-bT7"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Mxc-jS-oNK" secondAttribute="bottom" constant="66" id="SNG-XY-0fi"/>
                             <constraint firstAttribute="centerX" secondItem="jWx-uF-ME6" secondAttribute="centerX" id="d8B-vu-VyG"/>
                             <constraint firstAttribute="centerX" secondItem="HSx-WB-hhJ" secondAttribute="centerX" id="kw8-aC-zOt"/>
                             <constraint firstAttribute="centerX" secondItem="Mxc-jS-oNK" secondAttribute="centerX" id="n2M-Gr-j6U"/>
                             <constraint firstAttribute="centerY" secondItem="jWx-uF-ME6" secondAttribute="centerY" id="uRP-OZ-jfT"/>
                             <constraint firstAttribute="trailingMargin" secondItem="pe7-6h-vUe" secondAttribute="trailing" constant="-16" id="zkY-cZ-mC0"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Ij9-Bw-OkB"/>
+                                <exclude reference="8vi-0j-IXH"/>
+                                <exclude reference="SNG-XY-0fi"/>
+                            </mask>
+                        </variation>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Add Meme" id="T0f-QE-UKE"/>

@@ -34,6 +34,9 @@ class MemeViewController: UIViewController {
             // Use static data on first view
             return appDelegate.memes.count > 0 ? appDelegate.memes : Meme.staticMemes
         }
+        set {
+            println("Setting new value")
+        }
     }
     
     /**
