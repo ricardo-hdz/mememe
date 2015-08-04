@@ -17,6 +17,7 @@ class MemeDetailViewController: MemeViewController {
     override func viewWillAppear(animated: Bool) {
         //Assign meme to image
         self.memeImage!.image = meme.memeImage
+
         self.tabBarController?.tabBar.hidden = true
         setNavigationItems()
         setToolbarItems()
@@ -47,8 +48,10 @@ class MemeDetailViewController: MemeViewController {
     }
     
     func deleteMeme() {
-        if let found = find(memes.map({ $0.memeImage }), meme.memeImage) {
-            memes.removeAtIndex(found)
+        var storedMemes = self.getStoredMemes()
+        if let found = find(storedMemes.map({ $0.memeImage }), meme.memeImage) {
+            storedMemes.removeAtIndex(found)
+            self.setStoredMemes(storedMemes)
             self.dismissDetailController()
         }
     }
