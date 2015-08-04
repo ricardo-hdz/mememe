@@ -37,7 +37,7 @@ class MemeViewController: UIViewController {
     }
     
     /**
-        Action hanlder for the Add meme button
+        Action handler for the Add meme button
     **/
     func viewEditor() {
         let addMemeController = self.storyboard?.instantiateViewControllerWithIdentifier("AddMemeViewController") as! AddMemeViewController

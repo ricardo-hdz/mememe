@@ -95,7 +95,9 @@ class AddMemeViewController: UIViewController, UINavigationControllerDelegate, U
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    
+    /**
+        Textfield delegate methods
+    **/
     func textFieldDidBeginEditing(textField: UITextField) {
         textField.text = ""
     }
@@ -110,7 +112,7 @@ class AddMemeViewController: UIViewController, UINavigationControllerDelegate, U
     }
     
     /**
-    Subscriber to keyboard notifications
+        Subscriber to keyboard notifications
     **/
     func subscribeToKeyboardNotifications() {
         // Show keyboard
@@ -125,7 +127,7 @@ class AddMemeViewController: UIViewController, UINavigationControllerDelegate, U
     }
     
     /**
-    Repositions view frame when keyboard displays
+        Repositions view frame when keyboard displays
     **/
     func keyboardWillShow(notification: NSNotification) {
         if self.bottomText.isFirstResponder() {
