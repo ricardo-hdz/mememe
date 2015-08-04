@@ -18,14 +18,14 @@ class MemeListViewController: MemeViewController, UITableViewDataSource, UITable
     }
         
     @objc func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return memes.count
+        return self.getStoredMemes().count
     }
     
     /**
         Displays Meme List Table Rows
     **/
     @objc func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let meme = memes[indexPath.row]
+        let meme = self.getStoredMemes()[indexPath.row]
         let cell = tableView.dequeueReusableCellWithIdentifier("memeCell") as! MemeTableViewCell
         cell.memeImage.image = meme.memeImage
         cell.memeText.text = meme.topText + " " + meme.bottomText
@@ -38,7 +38,7 @@ class MemeListViewController: MemeViewController, UITableViewDataSource, UITable
     **/
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let memeDetailVC = self.storyboard?.instantiateViewControllerWithIdentifier("MemeDetailViewController") as! MemeDetailViewController
-        memeDetailVC.meme = self.memes[indexPath.row]
+        memeDetailVC.meme = self.getStoredMemes()[indexPath.row]
         self.navigationController?.pushViewController(memeDetailVC, animated: true)
     }
 

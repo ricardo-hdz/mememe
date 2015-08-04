@@ -21,7 +21,7 @@ class MemeCollectionViewController: MemeViewController, UICollectionViewDelegate
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return memes.count
+        return self.getStoredMemes().count
     }
     
     /**
@@ -29,7 +29,7 @@ class MemeCollectionViewController: MemeViewController, UICollectionViewDelegate
     **/
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("memeCell", forIndexPath: indexPath) as! MemeCell
-        let meme = memes[indexPath.item]
+        let meme = self.getStoredMemes()[indexPath.item]
         cell.memeImage.image = meme.memeImage
         cell.backgroundColor = UIColor.grayColor()
         return cell
@@ -40,7 +40,7 @@ class MemeCollectionViewController: MemeViewController, UICollectionViewDelegate
     **/
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let memeDetailVC = self.storyboard?.instantiateViewControllerWithIdentifier("MemeDetailViewController") as! MemeDetailViewController
-        memeDetailVC.meme = self.memes[indexPath.row]
+        memeDetailVC.meme = self.getStoredMemes()[indexPath.row]
         self.navigationController?.pushViewController(memeDetailVC, animated: true)
     }
 }

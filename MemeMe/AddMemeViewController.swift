@@ -11,7 +11,6 @@ import UIKit
 class AddMemeViewController: UIViewController, UINavigationControllerDelegate, UITextFieldDelegate, UIImagePickerControllerDelegate {
     
     @IBOutlet weak var originalImage: UIImageView!
-    @IBOutlet weak var menuBar: UIToolbar!
     @IBOutlet weak var topText: UITextField!
     @IBOutlet weak var bottomText: UITextField!
     @IBOutlet weak var memeToolbar: UIToolbar!
@@ -69,7 +68,7 @@ class AddMemeViewController: UIViewController, UINavigationControllerDelegate, U
         var cameraButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Camera, target: self, action: "displayImagePickerCamera")
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(.Camera)
         
-        menuBar.setItems([cameraButton, spaceItem, pickImage], animated: false)
+        memeToolbar.setItems([cameraButton, spaceItem, pickImage], animated: false)
     }
     
     /**
